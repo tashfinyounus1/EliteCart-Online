@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Product — EliteCart Online</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e63232'/><text y='.9em' font-size='70' x='14'>M</text></svg>">
+<link rel="stylesheet" href="shared.css">
+<style>
+.product-page{max-width:1200px;margin:0 auto;padding:32px 24px;}
+.product-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.product-gallery{position:sticky;top:80px;}
+.product-main-img{background:var(--bg3);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:420px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.product-main-img img{max-width:90%;max-height:90%;object-fit:contain;}
+.product-thumbs{display:flex;gap:8px;flex-wrap:wrap;}
+.product-thumb{width:68px;height:68px;background:var(--bg3);border:2px solid var(--border);border-radius:10px;overflow:hidden;cursor:pointer;transition:all var(--t);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.product-thumb.active,.product-thumb:hover{border-color:var(--red);}
+.product-thumb img{width:100%;height:100%;object-fit:contain;padding:4px;}
+.product-info-panel h1{font-family:var(--ff-d);font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px;}
+.product-meta{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;}
+.product-rating-row{display:flex;align-items:center;gap:6px;}
+.stars-lg{color:#fbbf24;font-size:16px;}
+.product-badge-lg{background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.product-badge-lg.new{background:#15803d;}
+.product-badge-lg.hot{background:#ea580c;}
+.price-section{margin-bottom:24px;padding:20px;background:var(--bg3);border-radius:12px;border:1px solid var(--border);}
+.price-main{font-family:var(--ff-d);font-size:36px;font-weight:800;color:var(--red);}
+.price-old-lg{font-size:18px;color:var(--g500);text-decoration:line-through;margin-left:12px;}
+.discount-tag{background:var(--red-dim);border:1px solid var(--border-r);color:var(--red);font-size:12px;font-weight:700;padding:4px 10px;border-radius:20px;display:inline-block;margin-top:8px;}
+.delivery-info{font-size:13px;color:var(--g300);margin-top:10px;display:flex;gap:16px;flex-wrap:wrap;}
+.delivery-info span{display:flex;align-items:center;gap:5px;}
+.qty-section{display:flex;align-items:center;gap:16px;margin-bottom:20px;}
+.qty-label{font-size:13px;font-weight:600;color:var(--g300);}
+.qty-control{display:flex;align-items:center;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.qty-control button{width:36px;height:36px;background:var(--bg3);border:none;color:#fff;font-size:16px;cursor:pointer;transition:background var(--t);}
+.qty-control button:hover{background:var(--red);}
+.qty-control span{width:48px;text-align:center;font-size:15px;font-weight:600;background:var(--bg2);}
+.action-btns{display:flex;gap:12px;margin-bottom:24px;}
+.btn-add-cart{flex:1;background:var(--red);color:#fff;padding:14px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all var(--t);}
+.btn-add-cart:hover{background:var(--red-dark);}
+.btn-wishlist-lg{width:48px;height:48px;background:var(--bg3);border:1px solid var(--border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;transition:all var(--t);}
+.btn-wishlist-lg:hover{border-color:var(--red);background:var(--red-dim);}
+.product-features{border-top:1px solid var(--border);padding-top:20px;}
+.feature-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);}
+.feature-icon{font-size:18px;flex-shrink:0;margin-top:2px;}
+.feature-text h4{font-size:13px;font-weight:600;margin-bottom:2px;}
+.feature-text p{font-size:12px;color:var(--g500);}
+.product-desc{margin-top:24px;}
+.product-desc h3{font-family:var(--ff-d);font-size:18px;font-weight:700;margin-bottom:12px;}
+.product-desc p{font-size:13px;color:var(--g300);line-height:1.85;}
+/* TABS */
+.product-tabs{margin-top:48px;}
+.tab-btns{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:24px;}
+.tab-btn{padding:12px 24px;font-size:14px;font-weight:600;color:var(--g500);background:none;border:none;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all var(--t);}
+.tab-btn.active{color:var(--red);border-bottom-color:var(--red);}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+/* RELATED */
+.related-section{margin-top:48px;}
+@media(max-width:900px){.product-layout{grid-template-columns:1fr;}.product-gallery{position:static;}}
+</style>
+</head>
+<body>
+<div class="mahi-page-hero" style="padding:24px 24px 32px;">
+  <div class="mahi-page-hero-inner">
+    <div class="mahi-breadcrumb" id="breadcrumb"><a href="index.html">Home</a> › <a href="category.html">Products</a> › Loading...</div>
+  </div>
+</div>
+
+<div class="product-page" id="product-page">
+  <div style="text-align:center;padding:80px 0;color:var(--g500);">
+    <div style="font-size:40px;margin-bottom:16px;">⌛</div>
+    <p>Loading product...</p>
+  </div>
+</div>
+
+<div class="related-section mahi-section" id="related-section" style="display:none;">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">🔗 Related Products</h2><a href="category.html" class="mahi-see-all">View All →</a></div>
+  <div class="mahi-products-grid" id="related-grid"></div>
+</div>
+
+<div data-footer-here></div>
+<script src="shared.js"></script>
+<script src="components.js"></script>
+<script>
+let _qty = 1;
+let _currentProduct = null;
+
+function _loadProduct() {
+  const hash = window.location.hash.slice(1);
+  const params = {};
+  hash.split('&').forEach(p => { const [k,v] = p.split('='); if (k) params[k] = decodeURIComponent(v||''); });
+  const id = params.id;
+  if (!id) { _showNotFound(); return; }
+  const p = MAHI_PRODUCTS.find(x => x.id === id);
+  if (!p) { _showNotFound(); return; }
+  _currentProduct = p;
+  document.title = p.name + ' — EliteCart Online';
+  document.getElementById('breadcrumb').innerHTML = `<a href="index.html">Home</a> › <a href="category.html#cat=${p.cat}">Category</a> › ${mhEsc(p.name.substring(0,40))}`;
+
+  const disc = p.old ? Math.round((p.old - p.price) / p.old * 100) : 0;
+  const stars = '★'.repeat(p.stars) + '☆'.repeat(5 - p.stars);
+  const badgeCls = p.bc === 'new' ? 'new' : p.bc === 'hot' ? 'hot' : '';
+  const wl = isWishlisted(p.id) ? '❤️' : '🤍';
+
+  document.getElementById('product-page').innerHTML = `
+    <div class="product-layout">
+      <div class="product-gallery">
+        <div class="product-main-img">
+          <img id="main-product-img" src="${mhEsc(p.img)}" alt="${mhEsc(p.name)}" onerror="this.src='${mhSvg(p.e, p.bg)}'">
+        </div>
+        <div class="product-thumbs">
+          <div class="product-thumb active" onclick="setThumb('${mhEsc(p.img)}', this)">
+            <img src="${mhEsc(p.img)}" alt="" onerror="this.style.opacity=0">
+          </div>
+          <div class="product-thumb" onclick="setThumb('https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=400&h=400&fit=crop&auto=format&q=80', this)">
+            <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=120&h=120&fit=crop&auto=format&q=80" alt="" onerror="this.style.opacity=0">
+          </div>
+          <div class="product-thumb" onclick="setThumb('https://images.unsplash.com/photo-1563770660941-20978e870e26?w=400&h=400&fit=crop&auto=format&q=80', this)">
+            <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?w=120&h=120&fit=crop&auto=format&q=80" alt="" onerror="this.style.opacity=0">
+          </div>
+        </div>
+      </div>
+
+      <div class="product-info-panel">
+        ${p.badge ? `<div class="product-badge-lg ${badgeCls}" style="margin-bottom:10px;">${mhEsc(p.badge)}</div>` : ''}
+        <h1>${mhEsc(p.name)}</h1>
+        <div class="product-meta">
+          <div class="product-rating-row">
+            <span class="stars-lg">${stars}</span>
+            <span style="font-size:13px;color:var(--g500);">(${p.rev.toLocaleString()} reviews)</span>
+          </div>
+          <span style="font-size:12px;color:var(--g500);">Category: <span style="color:var(--g300);">${p.cat}</span></span>
+        </div>
+
+        <div class="price-section">
+          <div>
+            <span class="price-main">${mhFmt(p.price)}</span>
+            ${p.old ? `<span class="price-old-lg">${mhFmt(p.old)}</span>` : ''}
+          </div>
+          ${disc > 0 ? `<div class="discount-tag">You save ${disc}% (${mhFmt(p.old - p.price)})</div>` : ''}
+          <div class="delivery-info">
+            <span>🚚 Free delivery on orders ৳999+</span>
+            <span>📦 In Stock — Ships in 1-2 days</span>
+          </div>
+        </div>
+
+        <div class="qty-section">
+          <span class="qty-label">Quantity:</span>
+          <div class="qty-control">
+            <button onclick="_changeQty(-1)">−</button>
+            <span id="qty-display">1</span>
+            <button onclick="_changeQty(1)">+</button>
+          </div>
+          <span style="font-size:12px;color:var(--g500);">Max 10 per order</span>
+        </div>
+
+        <div class="action-btns">
+          <button class="btn-add-cart" onclick="_addCurrentToCart()">🛒 Add to Cart</button>
+          <button class="btn-wishlist-lg" id="wl-btn-lg" onclick="toggleWishlist('${p.id}','${p.name.replace(/'/g,"&#39;")}',${p.price},'${mhEsc(p.img)}',this)">${wl}</button>
+        </div>
+
+        <div class="product-features">
+          <div class="feature-row"><div class="feature-icon">🔒</div><div class="feature-text"><h4>Secure Payment</h4><p>bKash, Nagad, VISA, Mastercard, COD</p></div></div>
+          <div class="feature-row"><div class="feature-icon">🔄</div><div class="feature-text"><h4>Easy Returns</h4><p>7-day hassle-free return policy</p></div></div>
+          <div class="feature-row"><div class="feature-icon">✅</div><div class="feature-text"><h4>Authentic Product</h4><p>100% original, verified products only</p></div></div>
+          <div class="feature-row"><div class="feature-icon">🇧🇩</div><div class="feature-text"><h4>Nationwide Delivery</h4><p>Delivering to all 64 districts of Bangladesh</p></div></div>
+        </div>
+
+        <div class="product-desc">
+          <h3>Product Description</h3>
+          <p>Experience premium quality with the <strong>${mhEsc(p.name)}</strong>. This product represents the perfect blend of performance, design, and value — crafted for those who demand the best.</p>
+          <p style="margin-top:10px;">Whether you're upgrading your lifestyle or looking for the perfect gift, this is a purchase you won't regret. Backed by our satisfaction guarantee and nationwide customer support.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="product-tabs">
+      <div class="tab-btns">
+        <button class="tab-btn active" onclick="switchTab('specs', this)">Specifications</button>
+        <button class="tab-btn" onclick="switchTab('reviews', this)">Reviews (${p.rev.toLocaleString()})</button>
+        <button class="tab-btn" onclick="switchTab('shipping', this)">Shipping & Returns</button>
+      </div>
+      <div class="tab-content active" id="tab-specs">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          ${[['Brand','Premium Brand'],['Model',mhEsc(p.name.split('—')[0].trim())],['Category',p.cat],['Availability','In Stock'],['Warranty','1 Year Official'],['Origin','Imported']].map(([k,v])=>`
+          <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px;display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:12px;color:var(--g500);font-weight:600;">${k}</span>
+            <span style="font-size:13px;color:var(--g100);">${v}</span>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div class="tab-content" id="tab-reviews">
+        <div style="margin-bottom:20px;display:flex;align-items:center;gap:20px;padding:20px;background:var(--bg3);border-radius:12px;border:1px solid var(--border);">
+          <div style="text-align:center;">
+            <div style="font-family:var(--ff-d);font-size:52px;font-weight:800;color:var(--red);line-height:1;">${p.stars}.0</div>
+            <div style="color:#fbbf24;font-size:18px;">${'★'.repeat(p.stars)}${'☆'.repeat(5-p.stars)}</div>
+            <div style="font-size:12px;color:var(--g500);margin-top:4px;">${p.rev.toLocaleString()} reviews</div>
+          </div>
+          <div style="flex:1;">
+            ${[5,4,3,2,1].map(n=>{const pct=n===p.stars?70:n===p.stars-1?20:5;return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;"><span style="font-size:12px;color:var(--g500);width:16px;">${n}★</span><div style="flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden;"><div style="height:100%;width:${pct}%;background:var(--red);border-radius:4px;"></div></div><span style="font-size:12px;color:var(--g500);width:24px;">${pct}%</span></div>`;}).join('')}
+          </div>
+        </div>
+        ${[{name:'Rahim H.',stars:5,date:'2 weeks ago',text:'Excellent product! Exactly as described. Fast delivery and great packaging. Highly recommend!'},
+           {name:'Fatema B.',stars:5,date:'1 month ago',text:'Bought this for my husband and he loves it. Premium quality at a fair price. Will buy again!'},
+           {name:'Kamal U.',stars:4,date:'3 weeks ago',text:'Good product overall. Build quality is solid. Delivery was quick. Minus one star for packaging.'}
+          ].map(r=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:36px;height:36px;background:var(--red);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;">${r.name[0]}</div>
+              <div><div style="font-size:14px;font-weight:600;">${r.name}</div><div style="color:#fbbf24;font-size:12px;">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div></div>
+            </div>
+            <span style="font-size:12px;color:var(--g500);">${r.date}</span>
+          </div>
+          <p style="font-size:13px;color:var(--g300);">${r.text}</p>
+        </div>`).join('')}
+      </div>
+      <div class="tab-content" id="tab-shipping">
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${[['🚚 Standard Delivery','2-4 business days — FREE for orders above ৳999. ৳60 for orders below.'],
+             ['⚡ Express Delivery','Next day delivery available in Dhaka, Chittagong, Sylhet — ৳120'],
+             ['🔄 Return Policy','7-day no-questions-asked return. Product must be unused in original packaging.'],
+             ['✅ Warranty','All products carry official brand warranty. Service centers available nationwide.'],
+             ['📦 Packaging','Secure, tamper-proof packaging to ensure product arrives in perfect condition.']
+            ].map(([t,d])=>`<div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;"><h4 style="font-size:14px;font-weight:600;margin-bottom:6px;">${t}</h4><p style="font-size:13px;color:var(--g500);">${d}</p></div>`).join('')}
+        </div>
+      </div>
+    </div>`;
+
+  // Load related
+  const related = MAHI_PRODUCTS.filter(x => x.cat === p.cat && x.id !== p.id).slice(0, 5);
+  if (related.length) {
+    document.getElementById('related-section').style.display = '';
+    renderProductGrid('related-grid', related);
+  }
+}
+
+function _showNotFound() {
+  document.getElementById('product-page').innerHTML = `<div style="text-align:center;padding:80px 0;color:var(--g500);">
+    <div style="font-size:64px;margin-bottom:16px;">🔍</div>
+    <h2 style="font-family:var(--ff-d);font-size:28px;margin-bottom:12px;">Product Not Found</h2>
+    <p style="margin-bottom:20px;">The product you're looking for doesn't exist or may have been removed.</p>
+    <a href="category.html" class="mahi-btn-primary" style="display:inline-flex;">Browse All Products →</a>
+  </div>`;
+}
+
+window.setThumb = function(src, el) {
+  document.getElementById('main-product-img').src = src;
+  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+};
+
+window.switchTab = function(tab, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  btn.classList.add('active');
+};
+
+window._changeQty = function(delta) {
+  _qty = Math.max(1, Math.min(10, _qty + delta));
+  const el = document.getElementById('qty-display');
+  if (el) el.textContent = _qty;
+};
+
+window._addCurrentToCart = function() {
+  if (!_currentProduct) return;
+  const p = _currentProduct;
+  for (let i = 0; i < _qty; i++) addToCart(p.id, p.name, p.price, p.img);
+  if (_qty > 1) showToast('✅ ' + _qty + 'x "' + p.name.substring(0, 25) + '" added to cart!');
+};
+
+document.addEventListener('DOMContentLoaded', _loadProduct);
+window.addEventListener('hashchange', () => { _qty = 1; _loadProduct(); });
+</script>
+</body>
+</html>

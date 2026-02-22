@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Products — EliteCart Online</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e63232'/><text y='.9em' font-size='70' x='14'>M</text></svg>">
+<link rel="stylesheet" href="shared.css">
+<style>
+.cat-page{max-width:1300px;margin:0 auto;padding:24px;display:grid;grid-template-columns:220px 1fr;gap:24px;}
+.filter-box{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px;}
+.filter-title{font-family:var(--ff-d);font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.filter-title::before{content:'';width:3px;height:14px;background:var(--red);border-radius:2px;display:block;}
+.filter-option{display:flex;align-items:center;gap:8px;margin-bottom:10px;cursor:pointer;color:var(--g300);font-size:13px;transition:color var(--t);}
+.filter-option:hover{color:var(--white);}
+.filter-option input[type="checkbox"],.filter-option input[type="radio"]{accent-color:var(--red);width:14px;height:14px;cursor:pointer;flex-shrink:0;}
+.price-row{display:flex;gap:8px;margin-bottom:8px;width:100%;}
+.price-input{flex:1;min-width:0;width:0;background:var(--bg2);border:1px solid var(--border);color:#fff;padding:8px 10px;border-radius:8px;font-size:13px;font-family:var(--ff-b);box-sizing:border-box;}
+.price-input:focus{outline:none;border-color:var(--red);}
+.btn-filter{width:100%;background:var(--red);border:none;color:#fff;padding:9px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:background var(--t);margin-top:4px;}
+.btn-filter:hover{background:var(--red-dark);}
+.btn-filter.secondary{background:var(--bg4);color:var(--g300);}
+.btn-filter.secondary:hover{background:var(--bg3);color:var(--white);}
+.cat-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.results-count{font-size:13px;color:var(--g500);margin-top:4px;}
+.sort-select{background:var(--bg3);border:1px solid var(--border);color:#fff;padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer;font-family:var(--ff-b);}
+.sort-select:focus{outline:none;border-color:var(--red);}
+.sort-select option{background:#1a1a1a;}
+.quick-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.qcat{background:var(--bg3);border:1px solid var(--border);color:var(--g300);padding:7px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all var(--t);white-space:nowrap;}
+.qcat:hover,.qcat.active{background:var(--red-dim);border-color:var(--border-r);color:var(--white);}
+.cat-empty{text-align:center;padding:80px 20px;color:var(--g500);}
+.cat-empty-icon{font-size:64px;margin-bottom:16px;}
+.pagination{display:flex;justify-content:center;gap:8px;margin-top:32px;flex-wrap:wrap;}
+.page-btn{background:var(--bg3);border:1px solid var(--border);color:var(--g300);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;transition:all var(--t);}
+.page-btn:hover,.page-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+@media(max-width:900px){.cat-page{grid-template-columns:1fr;}.cat-sidebar{display:none;}}
+</style>
+</head>
+<body>
+<div class="mahi-page-hero">
+  <div class="mahi-page-hero-inner">
+    <div class="mahi-breadcrumb"><a href="index.html">Home</a> › <span id="breadcrumb-cat">All Products</span></div>
+    <h1 id="page-title">All Products</h1>
+    <p id="page-subtitle">Discover our full collection of premium products</p>
+  </div>
+</div>
+
+<div class="cat-page">
+  <aside class="cat-sidebar">
+    <div class="filter-box">
+      <div class="filter-title">Categories</div>
+      <div class="filter-option" onclick="filterByCat('all')"><input type="radio" name="cat" id="cf-all" checked><label for="cf-all" style="cursor:pointer">All Products</label></div>
+      <div class="filter-option" onclick="filterByCat('flash')"><input type="radio" name="cat" id="cf-flash"><label for="cf-flash" style="cursor:pointer">⚡ Flash Sale</label></div>
+      <div class="filter-option" onclick="filterByCat('electronics')"><input type="radio" name="cat" id="cf-elec"><label for="cf-elec" style="cursor:pointer">📱 Electronics</label></div>
+      <div class="filter-option" onclick="filterByCat('fashion')"><input type="radio" name="cat" id="cf-fashion"><label for="cf-fashion" style="cursor:pointer">👗 Fashion</label></div>
+      <div class="filter-option" onclick="filterByCat('home')"><input type="radio" name="cat" id="cf-home"><label for="cf-home" style="cursor:pointer">🏠 Home & Living</label></div>
+      <div class="filter-option" onclick="filterByCat('beauty')"><input type="radio" name="cat" id="cf-beauty"><label for="cf-beauty" style="cursor:pointer">💄 Beauty</label></div>
+      <div class="filter-option" onclick="filterByCat('gaming')"><input type="radio" name="cat" id="cf-gaming"><label for="cf-gaming" style="cursor:pointer">🎮 Gaming</label></div>
+      <div class="filter-option" onclick="filterByCat('sports')"><input type="radio" name="cat" id="cf-sports"><label for="cf-sports" style="cursor:pointer">🏋️ Sports</label></div>
+      <div class="filter-option" onclick="filterByCat('books')"><input type="radio" name="cat" id="cf-books"><label for="cf-books" style="cursor:pointer">📚 Books</label></div>
+      <div class="filter-option" onclick="filterByCat('groceries')"><input type="radio" name="cat" id="cf-groc"><label for="cf-groc" style="cursor:pointer">🍎 Groceries</label></div>
+      <div class="filter-option" onclick="filterByCat('automotive')"><input type="radio" name="cat" id="cf-auto"><label for="cf-auto" style="cursor:pointer">🚗 Automotive</label></div>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Price Range</div>
+      <div class="price-row">
+        <input type="number" class="price-input" id="price-min" placeholder="Min ৳" min="0">
+        <input type="number" class="price-input" id="price-max" placeholder="Max ৳" min="0">
+      </div>
+      <button class="btn-filter" onclick="applyPriceFilter()">Apply Filter</button>
+      <button class="btn-filter secondary" onclick="clearFilters()" style="margin-top:6px;">Clear Filters</button>
+    </div>
+    <div class="filter-box">
+      <div class="filter-title">Min. Rating</div>
+      <div class="filter-option"><input type="radio" name="rating" id="r0" checked onchange="setRatingFilter(0)"><label for="r0" style="cursor:pointer">All Ratings</label></div>
+      <div class="filter-option"><input type="radio" name="rating" id="r4" onchange="setRatingFilter(4)"><label for="r4" style="cursor:pointer">★★★★☆ (4+)</label></div>
+      <div class="filter-option"><input type="radio" name="rating" id="r5" onchange="setRatingFilter(5)"><label for="r5" style="cursor:pointer">★★★★★ (5 stars)</label></div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="cat-top">
+      <div>
+        <h2 id="main-heading" style="font-family:var(--ff-d);font-size:24px;font-weight:800;">All Products</h2>
+        <div class="results-count" id="results-count"></div>
+      </div>
+      <select class="sort-select" id="sort-select" onchange="renderResults()">
+        <option value="default">Featured</option>
+        <option value="price-low">Price: Low → High</option>
+        <option value="price-high">Price: High → Low</option>
+        <option value="rating">Top Rated</option>
+        <option value="reviews">Most Reviewed</option>
+        <option value="discount">Biggest Discount</option>
+      </select>
+    </div>
+
+    <div class="quick-cats">
+      <div class="qcat active" data-cat="all" onclick="filterByCat('all')">All</div>
+      <div class="qcat" data-cat="flash" onclick="filterByCat('flash')">⚡ Flash Sale</div>
+      <div class="qcat" data-cat="electronics" onclick="filterByCat('electronics')">📱 Electronics</div>
+      <div class="qcat" data-cat="fashion" onclick="filterByCat('fashion')">👗 Fashion</div>
+      <div class="qcat" data-cat="home" onclick="filterByCat('home')">🏠 Home</div>
+      <div class="qcat" data-cat="beauty" onclick="filterByCat('beauty')">💄 Beauty</div>
+      <div class="qcat" data-cat="gaming" onclick="filterByCat('gaming')">🎮 Gaming</div>
+      <div class="qcat" data-cat="sports" onclick="filterByCat('sports')">🏋️ Sports</div>
+      <div class="qcat" data-cat="books" onclick="filterByCat('books')">📚 Books</div>
+      <div class="qcat" data-cat="groceries" onclick="filterByCat('groceries')">🍎 Groceries</div>
+    </div>
+
+    <div class="mahi-products-grid" id="cat-grid"></div>
+    <div id="cat-empty" class="cat-empty" style="display:none;">
+      <div class="cat-empty-icon">🔍</div>
+      <h3 style="font-family:var(--ff-d);font-size:22px;margin-bottom:8px;">No products found</h3>
+      <p>Try adjusting your filters or browse all categories</p>
+      <button class="btn-filter" style="width:auto;padding:10px 24px;margin-top:16px;" onclick="clearFilters()">Clear All Filters</button>
+    </div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+</div>
+
+<div data-footer-here></div>
+<script src="shared.js"></script>
+<script src="components.js"></script>
+<script>
+let _cat='all', _pMin=0, _pMax=Infinity, _minR=0, _q='', _pg=1;
+const PER_PAGE=10;
+
+const CAT_NAMES={all:'All Products',flash:'⚡ Flash Sale',electronics:'📱 Electronics',fashion:'👗 Fashion',home:'🏠 Home & Living',beauty:'💄 Beauty',gaming:'🎮 Gaming',sports:'🏋️ Sports',books:'📚 Books',groceries:'🍎 Groceries',automotive:'🚗 Automotive'};
+
+function _parseHash(){
+  const h=window.location.hash.slice(1);
+  const p={};
+  h.split('&').forEach(s=>{const[k,v]=s.split('=');if(k)p[k]=decodeURIComponent(v||'');});
+  if(p.cat){_cat=p.cat==='home-living'?'home':p.cat;}
+  if(p.search){_q=p.search;}
+}
+
+function _filtered(){
+  let prods=[...MAHI_PRODUCTS];
+  if(_q){const q=_q.toLowerCase();prods=prods.filter(p=>p.name.toLowerCase().includes(q)||p.cat.includes(q));}
+  if(_cat&&_cat!=='all'){
+    if(_cat==='flash')prods=prods.filter(p=>p.sec==='flash');
+    else prods=prods.filter(p=>p.cat===_cat);
+  }
+  prods=prods.filter(p=>p.price>=_pMin&&p.price<=_pMax);
+  if(_minR>0)prods=prods.filter(p=>p.stars>=_minR);
+  const s=document.getElementById('sort-select')?.value||'default';
+  if(s==='price-low')prods.sort((a,b)=>a.price-b.price);
+  else if(s==='price-high')prods.sort((a,b)=>b.price-a.price);
+  else if(s==='rating')prods.sort((a,b)=>b.stars-a.stars);
+  else if(s==='reviews')prods.sort((a,b)=>b.rev-a.rev);
+  else if(s==='discount')prods.sort((a,b)=>{const da=a.old?(a.old-a.price)/a.old:0;const db=b.old?(b.old-b.price)/b.old:0;return db-da;});
+  return prods;
+}
+
+window.renderResults=function(){
+  const all=_filtered();
+  const total=all.length;
+  const pages=Math.max(1,Math.ceil(total/PER_PAGE));
+  _pg=Math.min(_pg,pages);
+  const paged=all.slice((_pg-1)*PER_PAGE,_pg*PER_PAGE);
+  const grid=document.getElementById('cat-grid');
+  const empty=document.getElementById('cat-empty');
+  const cnt=document.getElementById('results-count');
+  if(cnt)cnt.textContent=total+' product'+(total!==1?'s':'')+' found';
+  if(!paged.length){grid.innerHTML='';empty.style.display='';}
+  else{empty.style.display='none';renderProductGrid('cat-grid',paged);}
+  const pg=document.getElementById('pagination');
+  if(pg){
+    if(pages<=1){pg.innerHTML='';return;}
+    let html='';
+    if(_pg>1)html+=`<button class="page-btn" onclick="_goPage(${_pg-1})">← Prev</button>`;
+    for(let i=Math.max(1,_pg-2);i<=Math.min(pages,_pg+2);i++)
+      html+=`<button class="page-btn${i===_pg?' active':''}" onclick="_goPage(${i})">${i}</button>`;
+    if(_pg<pages)html+=`<button class="page-btn" onclick="_goPage(${_pg+1})">Next →</button>`;
+    pg.innerHTML=html;
+  }
+};
+
+window._goPage=function(p){_pg=p;renderResults();window.scrollTo({top:0,behavior:'smooth'});};
+
+window.filterByCat=function(cat){
+  _cat=cat;_pg=1;
+  document.querySelectorAll('.qcat').forEach(q=>q.classList.toggle('active',q.dataset.cat===cat));
+  const label=CAT_NAMES[cat]||cat;
+  document.getElementById('main-heading').textContent=label;
+  document.getElementById('page-title').textContent=label;
+  document.getElementById('breadcrumb-cat').textContent=label;
+  renderResults();
+};
+
+window.applyPriceFilter=function(){
+  _pMin=parseInt(document.getElementById('price-min').value)||0;
+  _pMax=parseInt(document.getElementById('price-max').value)||Infinity;
+  _pg=1;renderResults();
+};
+
+window.setRatingFilter=function(r){_minR=r;_pg=1;renderResults();};
+
+window.clearFilters=function(){
+  _pMin=0;_pMax=Infinity;_minR=0;_q='';
+  document.getElementById('price-min').value='';
+  document.getElementById('price-max').value='';
+  document.getElementById('r0').checked=true;
+  filterByCat(_cat);
+};
+
+window.addEventListener('hashchange',()=>{_parseHash();filterByCat(_cat);});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  _parseHash();
+  if(_q){
+    if(document.getElementById('mahi-search-input'))document.getElementById('mahi-search-input').value=_q;
+    document.getElementById('page-title').textContent='Search: "'+_q+'"';
+    document.getElementById('main-heading').textContent='Search: "'+_q+'"';
+    document.getElementById('breadcrumb-cat').textContent='Search';
+    document.getElementById('page-subtitle').textContent='Results for "'+_q+'"';
+    renderResults();
+  } else {
+    filterByCat(_cat);
+  }
+});
+
+document.querySelectorAll('input[name="rating"]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    if(r.id==='r5')setRatingFilter(5);
+    else if(r.id==='r4')setRatingFilter(4);
+    else setRatingFilter(0);
+  });
+});
+</script>
+</body>
+</html>

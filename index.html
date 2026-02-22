@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EliteCart Online — Bangladesh's Premium Marketplace</title>
+<meta name="description" content="Shop electronics, fashion, home goods and more at Bangladesh's most trusted online marketplace.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23e63232'/><text y='.9em' font-size='70' x='14'>M</text></svg>">
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── HOME-SPECIFIC ── */
+.hero { max-width:1300px; margin:24px auto; padding:0 24px; display:grid; grid-template-columns:1fr 280px; gap:16px; }
+.hero-main { border-radius:16px; overflow:hidden; position:relative; height:400px; background:linear-gradient(135deg,#080808 0%,#1a0404 50%,#220606 100%); border:1px solid var(--border-r); }
+.hero-main::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(ellipse 60% 80% at 70% 50%, rgba(230,50,50,.08) 0%, transparent 70%); animation:heroGlow 4s ease-in-out infinite alternate; }
+@keyframes heroGlow { from{opacity:.5} to{opacity:1} }
+.hero-slider { width:100%; height:100%; position:relative; }
+.slide { position:absolute; inset:0; display:flex; align-items:center; padding:44px; opacity:0; transition:opacity .6s ease; pointer-events:none; }
+.slide.active { opacity:1; pointer-events:all; }
+.slide-content { flex:1; z-index:2; }
+.slide-tag { display:inline-flex; align-items:center; gap:6px; background:var(--red); color:#fff; font-size:10px; font-weight:700; padding:4px 12px; border-radius:20px; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:16px; }
+.slide-content h1 { font-family:var(--ff-d); font-size:44px; font-weight:800; line-height:1.08; margin-bottom:12px; }
+.slide-content h1 span { color:var(--red); }
+.slide-content p { color:var(--g300); margin-bottom:20px; font-size:14px; }
+.slide-price { font-family:var(--ff-d); font-size:30px; font-weight:800; color:var(--red); margin-bottom:22px; text-shadow:0 0 20px rgba(230,50,50,.4); }
+.slide-image { position:absolute; right:0; top:0; bottom:0; width:52%; display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.slide-image img { width:100%; height:100%; object-fit:cover; object-position:center; opacity:.8; }
+.slide-dots { position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:6px; z-index:10; }
+.dot { width:7px; height:7px; background:var(--g500); border-radius:50%; cursor:pointer; transition:all var(--t); }
+.dot.active { background:var(--red); width:22px; border-radius:4px; }
+.hero-side { display:flex; flex-direction:column; gap:12px; }
+.hero-card { flex:1; border-radius:12px; overflow:hidden; position:relative; border:1px solid var(--border); cursor:pointer; transition:all var(--t); background:var(--bg3); min-height:120px; display:flex; flex-direction:column; justify-content:flex-end; }
+.hero-card:hover { border-color:var(--border-r); transform:scale(1.02); }
+.hero-card img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.45; transition:opacity var(--t); }
+.hero-card:hover img { opacity:.6; }
+.hero-card-label { position:relative; z-index:2; padding:14px; background:linear-gradient(transparent,rgba(0,0,0,.92)); }
+.hero-card-label h3 { font-family:var(--ff-d); font-size:15px; font-weight:700; }
+.hero-card-label span { font-size:11px; color:var(--red); font-weight:600; }
+.cats-grid { display:grid; grid-template-columns:repeat(8,1fr); gap:12px; }
+.cat-card { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:18px 10px; text-align:center; cursor:pointer; transition:all var(--t); position:relative; overflow:hidden; }
+.cat-card::before { content:''; position:absolute; inset:0; background:var(--red-dim); opacity:0; transition:opacity var(--t); }
+.cat-card:hover::before { opacity:1; }
+.cat-card:hover { border-color:var(--border-r); transform:translateY(-4px); }
+.cat-icon { width:52px; height:52px; background:var(--bg2); border-radius:50%; margin:0 auto 10px; display:flex; align-items:center; justify-content:center; font-size:24px; border:1px solid var(--border); position:relative; }
+.cat-card span { font-size:11px; font-weight:600; color:var(--g300); }
+.flash-header { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+.flash-badge { background:var(--red); color:#fff; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:700; letter-spacing:1px; animation:pulse 2s infinite; }
+.countdown { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--g300); }
+.cd-unit { background:var(--bg3); border:1px solid var(--border); padding:4px 8px; border-radius:6px; font-family:var(--ff-d); font-size:17px; font-weight:700; min-width:36px; text-align:center; }
+.banner-strip { max-width:1300px; margin:0 auto 32px; padding:0 24px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+.strip-card { border-radius:12px; overflow:hidden; height:145px; position:relative; cursor:pointer; border:1px solid var(--border); transition:transform var(--t); }
+.strip-card:hover { transform:scale(1.01); }
+.strip-card img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+.strip-card:hover img { transform:scale(1.05); }
+.strip-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(0,0,0,.75) 0%,transparent 65%); display:flex; align-items:center; padding:22px; }
+.strip-overlay h3 { font-family:var(--ff-d); font-size:20px; font-weight:800; line-height:1.2; }
+.strip-overlay span { font-size:11px; color:var(--red); font-weight:700; display:block; margin-bottom:4px; letter-spacing:.5px; }
+@media(max-width:1100px){.hero{grid-template-columns:1fr;}.hero-side{display:none;}.cats-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:768px){.hero-main{height:280px;}.slide-content h1{font-size:30px;}.slide{padding:28px;}.banner-strip{grid-template-columns:1fr;}}
+@media(max-width:480px){.cats-grid{grid-template-columns:repeat(3,1fr);}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-main">
+    <div class="hero-slider">
+      <div class="slide active">
+        <div class="slide-content">
+          <div class="slide-tag">✦ NEW ARRIVAL</div>
+          <h1>Redmi Turbo 3<br><span>Next-Gen Power</span></h1>
+          <p>Snapdragon 8s Gen 3 · 5000mAh · 120Hz AMOLED</p>
+          <div class="slide-price">৳ 42,999</div>
+          <button class="mahi-btn-primary" onclick="addToCart('p1','Redmi Turbo 3',42999,'https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&h=600&fit=crop&auto=format&q=80');event.stopPropagation()">Shop Now →</button>
+        </div>
+        <div class="slide-image"><img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=700&h=560&fit=crop&auto=format&q=80" alt="Redmi Turbo 3" loading="eager"></div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-tag">🔥 HOT DEAL</div>
+          <h1>MacBook Air<br><span>M3 Chip</span></h1>
+          <p>18-hour battery · 13.6" Retina · MagSafe</p>
+          <div class="slide-price">৳ 1,49,999</div>
+          <button class="mahi-btn-primary" onclick="addToCart('p6','MacBook Air M3',149999,'https://images.unsplash.com/photo-1611186871525-12d3e3b13b8f?w=600&h=600&fit=crop&auto=format&q=80');event.stopPropagation()">Shop Now →</button>
+        </div>
+        <div class="slide-image"><img src="https://images.unsplash.com/photo-1611186871525-12d3e3b13b8f?w=700&h=560&fit=crop&auto=format&q=80" alt="MacBook Air M3" loading="eager"></div>
+      </div>
+      <div class="slide">
+        <div class="slide-content">
+          <div class="slide-tag">⭐ BESTSELLER</div>
+          <h1>Sony XM5<br><span>Pure Sound</span></h1>
+          <p>Industry ANC · 30hr battery · Hi-Res Audio</p>
+          <div class="slide-price">৳ 28,499</div>
+          <button class="mahi-btn-primary" onclick="addToCart('p4','Sony WH-1000XM5',28499,'https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=600&h=600&fit=crop&auto=format&q=80');event.stopPropagation()">Shop Now →</button>
+        </div>
+        <div class="slide-image"><img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=700&h=560&fit=crop&auto=format&q=80" alt="Sony XM5"></div>
+      </div>
+      <div class="slide-dots">
+        <div class="dot active" onclick="goSlide(0)"></div>
+        <div class="dot" onclick="goSlide(1)"></div>
+        <div class="dot" onclick="goSlide(2)"></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-side">
+    <div class="hero-card" onclick="location.href='category.html#cat=flash'">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=220&fit=crop&auto=format&q=80" alt="Flash Sale">
+      <div class="hero-card-label"><span>UP TO 60% OFF</span><h3>Flash Sale Today</h3></div>
+    </div>
+    <div class="hero-card" onclick="location.href='category.html#cat=fashion'">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=220&fit=crop&auto=format&q=80" alt="New Arrivals">
+      <div class="hero-card-label"><span>JUST DROPPED</span><h3>New Arrivals</h3></div>
+    </div>
+  </div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">Shop by Category</h2><a href="category.html#cat=all" class="mahi-see-all">View All →</a></div>
+  <div class="cats-grid">
+    <div class="cat-card" onclick="location.href='category.html#cat=electronics'"><div class="cat-icon">📱</div><span>Electronics</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=fashion'"><div class="cat-icon">👗</div><span>Fashion</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=home-living'"><div class="cat-icon">🏠</div><span>Home & Living</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=beauty'"><div class="cat-icon">💄</div><span>Beauty</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=gaming'"><div class="cat-icon">🎮</div><span>Gaming</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=groceries'"><div class="cat-icon">🍎</div><span>Groceries</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=sports'"><div class="cat-icon">🏋️</div><span>Sports</span></div>
+    <div class="cat-card" onclick="location.href='category.html#cat=books'"><div class="cat-icon">📚</div><span>Books</span></div>
+  </div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head">
+    <div class="flash-header">
+      <h2 class="mahi-section-title">⚡ Flash Sale</h2>
+      <span class="flash-badge">LIVE</span>
+      <div class="countdown">Ends in: <span class="cd-unit" id="cd-h">00</span>:<span class="cd-unit" id="cd-m">00</span>:<span class="cd-unit" id="cd-s">00</span></div>
+    </div>
+    <a href="category.html#cat=flash" class="mahi-see-all">View All →</a>
+  </div>
+  <div class="mahi-products-grid" id="flash-grid"></div>
+</div>
+
+<div class="banner-strip reveal">
+  <div class="strip-card" onclick="location.href='category.html#cat=gaming'">
+    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=700&h=220&fit=crop&auto=format&q=80" alt="Gaming">
+    <div class="strip-overlay"><div><span>UP TO 40% OFF</span><h3>Gaming Gear</h3></div></div>
+  </div>
+  <div class="strip-card" onclick="location.href='category.html#cat=fashion'">
+    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=700&h=220&fit=crop&auto=format&q=80" alt="Fashion">
+    <div class="strip-overlay"><div><span>NEW SEASON</span><h3>Fashion Sale</h3></div></div>
+  </div>
+  <div class="strip-card" onclick="location.href='category.html#cat=home-living'">
+    <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&h=220&fit=crop&auto=format&q=80" alt="Home">
+    <div class="strip-overlay"><div><span>MEGA DEALS</span><h3>Home & Living</h3></div></div>
+  </div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">🔥 Trending Now</h2><a href="category.html#cat=all" class="mahi-see-all">View All →</a></div>
+  <div class="mahi-products-grid" id="trending-grid"></div>
+</div>
+
+<div class="mahi-features-bar reveal">
+  <div class="mahi-feat-card"><div class="mahi-feat-icon">🚚</div><div class="mahi-feat-text"><h4>Free Delivery</h4><p>On orders above ৳999</p></div></div>
+  <div class="mahi-feat-card"><div class="mahi-feat-icon">🔄</div><div class="mahi-feat-text"><h4>Easy Returns</h4><p>7-day hassle-free return</p></div></div>
+  <div class="mahi-feat-card"><div class="mahi-feat-icon">🔒</div><div class="mahi-feat-text"><h4>Secure Payment</h4><p>100% secured checkout</p></div></div>
+  <div class="mahi-feat-card" onclick="openTrackModal()" style="cursor:pointer"><div class="mahi-feat-icon">📦</div><div class="mahi-feat-text"><h4>Track Order</h4><p>Real-time delivery tracking</p></div></div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">🏠 Home & Living</h2><a href="category.html#cat=home-living" class="mahi-see-all">View All →</a></div>
+  <div class="mahi-products-grid" id="home-grid"></div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">👗 Fashion & Style</h2><a href="category.html#cat=fashion" class="mahi-see-all">View All →</a></div>
+  <div class="mahi-products-grid" id="fashion-grid"></div>
+</div>
+
+<div class="mahi-section reveal">
+  <div class="mahi-section-head"><h2 class="mahi-section-title">🏋️ Sports & Fitness</h2><a href="category.html#cat=sports" class="mahi-see-all">View All →</a></div>
+  <div class="mahi-products-grid" id="sports-grid"></div>
+</div>
+
+<section style="background:var(--bg2);border-top:1px solid var(--border);padding:80px 24px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(230,50,50,.05) 0%,transparent 70%);pointer-events:none;"></div>
+  <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="display:inline-block;background:var(--red-dim);border:1px solid var(--border-r);color:var(--red);font-size:11px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">BUILT BY</span>
+      <h2 style="font-family:var(--ff-d);font-size:38px;font-weight:800;">The Developer</h2>
+      <p style="color:var(--g500);font-size:14px;margin-top:8px;">The mind &amp; code behind EliteCart Online</p>
+    </div>
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:20px;padding:40px;display:flex;gap:40px;align-items:flex-start;position:relative;overflow:hidden;" id="dev-card">
+      <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle at 100% 0%,rgba(230,50,50,.08),transparent 70%);pointer-events:none;"></div>
+      <div style="flex-shrink:0;text-align:center;">
+        <div style="width:140px;height:140px;border-radius:16px;overflow:hidden;border:3px solid rgba(230,50,50,.4);box-shadow:0 0 30px rgba(230,50,50,.2);margin-bottom:14px;"><img src="developer.jpg" alt="MD. Tashfin Younus" style="width:100%;height:100%;object-fit:cover;object-position:center top;"></div>
+        <div style="display:inline-flex;align-items:center;gap:5px;background:var(--bg2);border:1px solid var(--border);padding:5px 10px;border-radius:20px;font-size:11px;color:var(--g300);">📍 Dhaka, Bangladesh</div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap;">
+          <h3 style="font-family:var(--ff-d);font-size:26px;font-weight:800;">MD. Tashfin Younus</h3>
+          <span style="background:var(--red-dim);border:1px solid var(--border-r);color:var(--red);font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;">FULLSTACK DEVELOPER</span>
+        </div>
+        <p style="color:var(--g500);font-size:12px;margin-bottom:14px;">🎓 CSE · Daffodil International University · Class of 2028</p>
+        <p style="color:var(--g300);font-size:13px;line-height:1.85;margin-bottom:24px;">Tashfin is a passionate Computer Science and Engineering student with a strong interest in modern and responsive website development. He builds seamless, user-first digital experiences with clean code and thoughtful design.</p>
+        <div style="margin-bottom:22px;">
+          <p style="font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--g500);font-weight:700;margin-bottom:10px;">Tech Stack</p>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;">
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">C</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">C++</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">Python</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">JavaScript</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">React</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">Node.js</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">MongoDB</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">Firebase</span>
+            <span style="background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:4px 12px;border-radius:6px;font-size:12px;">Next.js</span>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <a href="https://github.com/tashfinyounus1" target="_blank" class="dev-link">GitHub</a>
+          <a href="https://www.linkedin.com/in/md-tashfin-younus-1329ab34a" target="_blank" class="dev-link">LinkedIn</a>
+          <a href="https://mail.google.com/mail/?view=cm&to=tashfinyounus1@gmail.com" target="_blank" rel="noopener noreferrer" class="dev-link">Email Me</a>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;color:var(--g700);font-size:12px;margin-top:28px;">✦ Designed &amp; Developed with ❤️ by <span style="color:var(--red);font-weight:600;">MD. Tashfin Younus</span> · Dhaka, Bangladesh</p>
+  </div>
+</section>
+
+<style>
+.dev-link { display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--border);color:var(--g300);padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;transition:all .22s; }
+.dev-link:hover { border-color:rgba(230,50,50,.5);color:#fff;background:var(--red-dim); }
+#dev-card { transition:border-color .25s; }
+#dev-card:hover { border-color:rgba(230,50,50,.4); }
+</style>
+
+<div data-footer-here></div>
+
+<script src="shared.js"></script>
+<script src="components.js"></script>
+<script>
+// SLIDER
+const _slides = document.querySelectorAll('.slide');
+const _dots = document.querySelectorAll('.dot');
+let _cur = 0, _intv;
+window.goSlide = function(i) {
+  _slides[_cur].classList.remove('active'); _dots[_cur].classList.remove('active');
+  _cur = ((i % _slides.length) + _slides.length) % _slides.length;
+  _slides[_cur].classList.add('active'); _dots[_cur].classList.add('active');
+};
+function _startSlider() { _intv = setInterval(() => goSlide(_cur + 1), 4800); }
+_dots.forEach((d, i) => d.addEventListener('click', () => { clearInterval(_intv); goSlide(i); _startSlider(); }));
+_startSlider();
+
+// COUNTDOWN
+function _tick() {
+  const now = new Date(), end = new Date();
+  end.setHours(23, 59, 59, 0);
+  let d = Math.max(0, end - now);
+  const h = Math.floor(d / 3600000); d %= 3600000;
+  const m = Math.floor(d / 60000), s = Math.floor((d % 60000) / 1000);
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('cd-h').textContent = pad(h);
+  document.getElementById('cd-m').textContent = pad(m);
+  document.getElementById('cd-s').textContent = pad(s);
+}
+_tick(); setInterval(_tick, 1000);
+
+// RENDER GRIDS
+document.addEventListener('DOMContentLoaded', () => {
+  renderProductGrid('flash-grid',    MAHI_PRODUCTS.filter(p => p.sec === 'flash'));
+  renderProductGrid('trending-grid', MAHI_PRODUCTS.filter(p => p.sec === 'trending').slice(0, 5));
+  renderProductGrid('home-grid',     MAHI_PRODUCTS.filter(p => p.cat === 'home'));
+  renderProductGrid('fashion-grid',  MAHI_PRODUCTS.filter(p => p.cat === 'fashion').slice(0, 5));
+  renderProductGrid('sports-grid',   MAHI_PRODUCTS.filter(p => p.cat === 'sports'));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — EliteCart Online</title>
+  <meta name="description" content="Get in touch with EliteCart Online. We're here to help with your orders, questions, and feedback.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    /* ── Contact Page Styles ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 40px;
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    @media(max-width: 768px){ .contact-grid { grid-template-columns: 1fr; } }
+
+    /* Info Panel */
+    .contact-info {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 32px;
+      height: fit-content;
+    }
+    .contact-info h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .contact-info p.sub {
+      color: #aaa;
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .contact-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--red-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-item-body h4 {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .contact-item-body p, .contact-item-body a {
+      color: #bbb;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item-body a:hover { color: var(--red); }
+
+    .contact-socials {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+    }
+    .contact-socials h4 {
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .social-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: #bbb;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .social-link:hover {
+      border-color: var(--red);
+      color: var(--red);
+      background: var(--red-dim);
+    }
+
+    /* Form Panel */
+    .contact-form-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+    }
+    @media(max-width:480px){ .contact-form-wrap { padding: 24px 18px; } }
+    .contact-form-wrap h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .contact-form-wrap p.sub {
+      color: #aaa;
+      font-size: 0.93rem;
+      margin-bottom: 30px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media(max-width:600px){ .form-row { grid-template-columns: 1fr; } }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ccc;
+      letter-spacing: 0.3px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: #fff;
+      padding: 12px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(220,38,38,0.12);
+    }
+    .form-group select option { background: var(--bg3); }
+    .form-group textarea { min-height: 130px; }
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .btn-send {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-send:hover { background: var(--red-dark); }
+    .btn-send:active { transform: scale(0.98); }
+    .form-note {
+      color: #888;
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    /* FAQ */
+    .faq-section {
+      max-width: 800px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .section-header-center {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .section-header-center .tag {
+      display: inline-block;
+      background: var(--red-dim);
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+    .section-header-center h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .section-header-center p {
+      color: #999;
+      font-size: 0.98rem;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--red); }
+    .faq-q {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      color: #fff;
+      font-size: 0.97rem;
+      user-select: none;
+    }
+    .faq-q:hover { color: var(--red); }
+    .faq-arrow {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      color: var(--red);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.2s;
+      color: #aaa;
+      font-size: 0.93rem;
+      line-height: 1.7;
+      padding: 0 22px;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 22px 20px;
+    }
+
+    /* Map strip */
+    .map-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 20px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .map-strip h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .map-strip p { color: #888; font-size: 0.93rem; margin-bottom: 20px; }
+    .map-placeholder {
+      max-width: 700px;
+      margin: 0 auto;
+      background: var(--bg3);
+      border: 1px dashed var(--border-r);
+      border-radius: 16px;
+      padding: 60px 20px;
+      color: #555;
+      font-size: 0.9rem;
+    }
+    .map-placeholder span { font-size: 3rem; display: block; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div data-header-here></div>
+  <div data-panels-here></div>
+  <div data-modals-here></div>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span>›</span>
+        <span>Contact Us</span>
+      </div>
+      <h1>Get in <span class="hero-accent">Touch</span></h1>
+      <p>We're here to help. Reach out and we'll get back to you within 24 hours.</p>
+    </div>
+  </section>
+
+  <!-- Contact Grid -->
+  <div class="contact-grid reveal">
+    <!-- Info -->
+    <div class="contact-info">
+      <h2>Contact Info</h2>
+      <p class="sub">Have questions about your order or our products? Our support team is ready to assist you every day of the week.</p>
+
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-item-body">
+          <h4>Phone</h4>
+          <p><a href="tel:+8801700000000">+880 1700-000000</a></p>
+          <p><a href="tel:+8801800000000">+880 1800-000000</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-item-body">
+          <h4>Email</h4>
+          <p><a href="mailto:support@elitecart.com.bd">support@elitecart.com.bd</a></p>
+          <p><a href="mailto:orders@elitecart.com.bd">orders@elitecart.com.bd</a></p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-item-body">
+          <h4>Head Office</h4>
+          <p>House 42, Road 11, Dhanmondi<br>Dhaka-1209, Bangladesh</p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⏰</div>
+        <div class="contact-item-body">
+          <h4>Support Hours</h4>
+          <p>Saturday – Thursday: 9 AM – 9 PM</p>
+          <p>Friday: 2 PM – 9 PM (After Jumuah)</p>
+        </div>
+      </div>
+
+      <div class="contact-socials">
+        <h4>Find Us Online</h4>
+        <div class="social-links">
+          <a href="#" class="social-link">📘 Facebook</a>
+          <a href="#" class="social-link">📸 Instagram</a>
+          <a href="#" class="social-link">🐦 Twitter/X</a>
+          <a href="#" class="social-link">▶️ YouTube</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-form-wrap">
+      <h2>Send a Message</h2>
+      <p class="sub">Fill out the form and we'll reply within 24 hours.</p>
+
+      <div id="formSuccess" style="display:none; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); border-radius:10px; padding:16px 20px; color:#4ade80; font-size:0.95rem; margin-bottom:20px;">
+        ✅ Message sent successfully! We'll get back to you within 24 hours.
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Full Name *</label>
+          <input type="text" id="cf-name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email Address *</label>
+          <input type="email" id="cf-email" placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-phone">Phone Number</label>
+          <input type="tel" id="cf-phone" placeholder="+880 1XXX-XXXXXX">
+        </div>
+        <div class="form-group">
+          <label for="cf-subject">Subject *</label>
+          <select id="cf-subject">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="order">Order Status / Tracking</option>
+            <option value="return">Return / Refund</option>
+            <option value="product">Product Inquiry</option>
+            <option value="payment">Payment Issue</option>
+            <option value="account">Account Help</option>
+            <option value="partnership">Business / Partnership</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="cf-order">Order Number (if applicable)</label>
+        <input type="text" id="cf-order" placeholder="e.g. MH-2025-00001">
+      </div>
+
+      <div class="form-group">
+        <label for="cf-message">Message *</label>
+        <textarea id="cf-message" placeholder="Describe your issue or question in detail..."></textarea>
+      </div>
+
+      <div class="form-submit-row">
+        <button class="btn-send" onclick="submitContactForm()">Send Message</button>
+        <p class="form-note">We typically reply within 24 hours on business days.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Map -->
+  <div class="map-strip">
+    <h3>Visit Our Warehouse</h3>
+    <p>Pickup available by appointment — Dhanmondi, Dhaka</p>
+    <div class="map-placeholder">
+      <span>🗺️</span>
+      Interactive map coming soon.<br>
+      Use Google Maps to find: <strong style="color:#ccc;">House 42, Road 11, Dhanmondi, Dhaka</strong>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="faq-section reveal">
+    <div class="section-header-center">
+      <div class="tag">FAQ</div>
+      <h2>Frequently Asked Questions</h2>
+      <p>Quick answers to the most common questions.</p>
+    </div>
+
+    <div class="faq-list" id="faqList">
+      <!-- FAQs injected by JS -->
+    </div>
+  </section>
+
+  <div data-footer-here></div>
+
+  <script src="shared.js"></script>
+  <script src="components.js"></script>
+  <script>
+    /* ── FAQ Data ── */
+    const FAQS = [
+      {
+        q: 'How long does delivery take?',
+        a: 'Standard delivery within Dhaka takes 1–2 business days. Outside Dhaka (nationwide) typically 3–5 business days. Express same-day delivery is available in Dhaka for orders placed before 12 PM, subject to availability.'
+      },
+      {
+        q: 'What payment methods do you accept?',
+        a: 'We accept bKash, Nagad, Rocket, VISA/Mastercard (debit & credit), Cash on Delivery (COD), and bank transfers. All online payments are processed securely via SSL-encrypted gateways.'
+      },
+      {
+        q: 'Can I return or exchange a product?',
+        a: 'Yes! We offer a 7-day easy return policy for most products. The item must be unused, in original packaging with all tags and accessories. Electronics have a 3-day return window. To initiate a return, contact our support team or visit your order history page.'
+      },
+      {
+        q: 'How do I track my order?',
+        a: 'Once your order is shipped, you\'ll receive an SMS and email with a tracking number. You can also track your order anytime by clicking the "Track Order" button in the header and entering your order number and phone number.'
+      },
+      {
+        q: 'Are the products on EliteCart Online authentic?',
+        a: 'Absolutely. We source directly from authorized distributors and official brand representatives. Every product comes with its original warranty and brand packaging. If you ever receive a non-authentic item, we offer a full refund.'
+      },
+      {
+        q: 'Do you offer installment plans?',
+        a: 'Yes, we offer 0% EMI through select bank cards (BRAC Bank, Dutch-Bangla, City Bank) for purchases above ৳10,000. During checkout, select the "Installment" payment option and choose your preferred plan (3, 6, or 12 months).'
+      },
+      {
+        q: 'Can I cancel my order after placing it?',
+        a: 'Orders can be cancelled within 2 hours of placement if they haven\'t been shipped yet. After that, you would need to follow the return process once delivery is complete. To cancel, contact us immediately by phone or via this contact form.'
+      },
+      {
+        q: 'Is my personal information safe with EliteCart Online?',
+        a: 'Yes. We use industry-standard SSL encryption for all data transmission. We never sell or share your personal information with third parties. Your payment details are handled by PCI-DSS compliant payment processors and are never stored on our servers.'
+      }
+    ];
+
+    function buildFAQ() {
+      const list = document.getElementById('faqList');
+      list.innerHTML = FAQS.map((f, i) => `
+        <div class="faq-item" id="faq${i}">
+          <div class="faq-q" onclick="toggleFaq(${i})">
+            <span>${f.q}</span>
+            <div class="faq-arrow">▾</div>
+          </div>
+          <div class="faq-a">${f.a}</div>
+        </div>
+      `).join('');
+    }
+
+    function toggleFaq(i) {
+      const item = document.getElementById('faq' + i);
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(el => el.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    }
+
+    function submitContactForm() {
+      const name    = document.getElementById('cf-name').value.trim();
+      const email   = document.getElementById('cf-email').value.trim();
+      const subject = document.getElementById('cf-subject').value;
+      const message = document.getElementById('cf-message').value.trim();
+
+      if (!name)    { showToast('Please enter your name.', 'error');    return; }
+      if (!email || !email.includes('@')) { showToast('Please enter a valid email.', 'error'); return; }
+      if (!subject) { showToast('Please select a subject.', 'error');   return; }
+      if (!message) { showToast('Please write your message.', 'error'); return; }
+
+      // Simulate submission
+      document.querySelector('.btn-send').disabled = true;
+      document.querySelector('.btn-send').textContent = 'Sending…';
+      setTimeout(() => {
+        document.getElementById('formSuccess').style.display = 'block';
+        document.getElementById('cf-name').value    = '';
+        document.getElementById('cf-email').value   = '';
+        document.getElementById('cf-phone').value   = '';
+        document.getElementById('cf-subject').value = '';
+        document.getElementById('cf-order').value   = '';
+        document.getElementById('cf-message').value = '';
+        document.querySelector('.btn-send').disabled    = false;
+        document.querySelector('.btn-send').textContent = 'Send Message';
+        showToast('Message sent! We\'ll reply within 24 hours.', 'success');
+        window.scrollTo({ top: document.getElementById('formSuccess').offsetTop - 100, behavior: 'smooth' });
+      }, 1200);
+    }
+
+    buildFAQ();
+  </script>
+</body>
+</html>
