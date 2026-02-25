@@ -340,8 +340,7 @@
         <div class="contact-icon">📞</div>
         <div class="contact-item-body">
           <h4>Phone</h4>
-          <p><a href="tel:+8801700000000">+880 1700-000000</a></p>
-          <p><a href="tel:+8801800000000">+880 1800-000000</a></p>
+                    <p><a href="tel:+8801877011100">+880 1877-011100</a></p>
         </div>
       </div>
 
@@ -349,8 +348,7 @@
         <div class="contact-icon">✉️</div>
         <div class="contact-item-body">
           <h4>Email</h4>
-          <p><a href="mailto:support@elitecart.com.bd">support@elitecart.com.bd</a></p>
-          <p><a href="mailto:orders@elitecart.com.bd">orders@elitecart.com.bd</a></p>
+                    <p><a href="https://www.facebook.com/tashfin.younus.840">tashfinyounus1@gmail.com</a></p>
         </div>
       </div>
 
@@ -358,7 +356,7 @@
         <div class="contact-icon">📍</div>
         <div class="contact-item-body">
           <h4>Head Office</h4>
-          <p>House 42, Road 11, Dhanmondi<br>Dhaka-1209, Bangladesh</p>
+          <p>Kaliganj, Gazipur<br>Bangladesh</p>
         </div>
       </div>
 
@@ -405,7 +403,7 @@
       <div class="form-row">
         <div class="form-group">
           <label for="cf-phone">Phone Number</label>
-          <input type="tel" id="cf-phone" placeholder="+880 1XXX-XXXXXX">
+          <input type="tel" id="cf-phone" placeholder="+8801877011100">
         </div>
         <div class="form-group">
           <label for="cf-subject">Subject *</label>
@@ -555,5 +553,30 @@
 
     buildFAQ();
   </script>
+<script>
+  // Contact form UX (client-side only)
+  function submitContactForm(){
+    const name = document.getElementById('cf-name')?.value?.trim();
+    const email = document.getElementById('cf-email')?.value?.trim();
+    const phone = document.getElementById('cf-phone')?.value?.trim();
+    const msg = document.getElementById('cf-message')?.value?.trim();
+
+    if(!name || !email || !msg){
+      if (typeof showToast === 'function') showToast('Please fill in Name, Email, and Message.');
+      return;
+    }
+
+    const success = document.getElementById('contact-success');
+    if(success) success.style.display = 'block';
+
+    if (typeof showToast === 'function') showToast('Thanks! Your message has been received.');
+
+    // quick reset (keep phone if user typed it)
+    document.getElementById('cf-name').value = '';
+    document.getElementById('cf-email').value = '';
+    if(!phone) document.getElementById('cf-phone').value = '';
+    document.getElementById('cf-message').value = '';
+  }
+</script>
 </body>
 </html>

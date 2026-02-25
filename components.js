@@ -207,6 +207,12 @@
       <li><a href="#" onclick="showToast('7-day hassle-free returns!');return false">Returns</a></li>
       <li><a href="#" onclick="showToast('Free delivery on orders above ৳999!');return false">Shipping Info</a></li>
     </ul></div>
+
+    <div class="mahi-footer-col"><h4>Contact</h4><ul>
+      <li><a href="tel:+8801877011100">📞 +880 1877-011100</a></li>
+      <li><a href="mailto:tashfinyounus1@gmail.com">✉️ tashfinyounus1@gmail.com</a></li>
+      <li><a href="contact.html">📍 Kaliganj, Gazipur</a></li>
+    </ul></div>
   </div>
   <div class="mahi-footer-bottom">
     <p>© 2025 EliteCart Online. All rights reserved. Made with ❤️ in Bangladesh.</p>
