@@ -1,9 +1,3 @@
-// ══════════════════════════════════════════════════════
-//  EliteCart Online — shared.js  (v2 — complete rewrite)
-//  All pages import this. Handles: cart, wishlist,
-//  auth, toast, track, checkout, search, slider, nav.
-// ══════════════════════════════════════════════════════
-
 /* ── PRODUCT CATALOGUE ── */
 const MAHI_PRODUCTS = [
   {id:'p1',  badge:'-20%', bc:'',     cat:'electronics', name:'Redmi Turbo 3 — 12GB/256GB Snapdragon 8s Gen 3',  price:42999,  old:53999,  stars:5, rev:382,   img:'images/Redmi-Turbo-3-Titanium.webp',  e:'📱', bg:'#1a1025', sec:'flash'},
