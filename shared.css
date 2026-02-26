@@ -500,3 +500,79 @@ footer { background:var(--bg2); border-top:1px solid var(--border); margin-top:4
 @media(max-width:480px) {
   .mahi-products-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
 }
+
+
+/* Logo image replacement */
+.mahi-logo-img{height:44px;width:auto;display:block;}
+@media (max-width:520px){.mahi-logo-img{height:38px;}}
+
+
+/* Enlarged EliteCart Logo */
+.navbar-brand img, .logo {
+    height: 90px;
+    width: auto;
+}
+
+
+/* FINAL: Full Navbar Height EliteCart Logo */
+.navbar {
+    min-height: 100px;
+}
+
+.navbar-brand img, .logo {
+    height: 100px;
+    width: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        min-height: 80px;
+    }
+    .navbar-brand img, .logo {
+        height: 70px;
+    }
+}
+
+
+/* ===== FINAL LOGO & FAVICON OPTIMIZATION ===== */
+#mahi-header .mahi-header-inner{
+  min-height: 120px !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:18px !important;
+}
+
+#mahi-header .mahi-logo{
+  display:flex !important;
+  align-items:center !important;
+  height:100% !important;
+}
+
+#mahi-header .mahi-logo-img{
+  height: 110px !important;
+  width: auto !important;
+  max-height:none !important;
+  object-fit:contain !important;
+  display:block !important;
+}
+
+/* Footer logo bigger + aligned */
+.mahi-footer-brand .mahi-footer-logo{
+  display:flex !important;
+  align-items:center !important;
+}
+
+.mahi-footer-logo-img{
+  height: 90px !important;
+  width: auto !important;
+  object-fit: contain !important;
+  display:block !important;
+}
+
+@media (max-width: 768px){
+  #mahi-header .mahi-header-inner{ min-height: 92px !important; }
+  #mahi-header .mahi-logo-img{ height: 70px !important; }
+  .mahi-footer-logo-img{ height: 70px !important; }
+}
+

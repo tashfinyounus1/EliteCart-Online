@@ -11,8 +11,7 @@
 <header id="mahi-header">
   <div class="mahi-header-inner">
     <a href="index.html" class="mahi-logo">
-      <div class="mahi-logo-mark">E</div>
-      <div class="mahi-logo-name">EliteCart <span>Online</span></div>
+      <img src="images/elitecart-logo.png" alt="EliteCart Online" class="mahi-logo-img">
     </a>
     <div id="mahi-search-wrap">
       <input type="text" id="mahi-search-input" placeholder="Search products, brands, categories..." oninput="handleSearchInput()" onkeydown="handleSearchKey(event)" autocomplete="off">
@@ -176,9 +175,8 @@
 <footer>
   <div class="mahi-footer-inner">
     <div class="mahi-footer-brand">
-      <a href="index.html" class="mahi-logo" style="margin-bottom:14px">
-        <div class="mahi-logo-mark">E</div>
-        <div class="mahi-logo-name">EliteCart <span>Online</span></div>
+      <a href="index.html" class="mahi-logo mahi-footer-logo" style="margin-bottom:14px">
+        <img src="images/elitecart-logo.png" alt="EliteCart Online" class="mahi-footer-logo-img">
       </a>
       <p>Your one-stop universal online shopping destination in Bangladesh. Quality products, best prices, fast delivery.</p>
       <div class="mahi-social-links">
@@ -211,7 +209,7 @@
     <div class="mahi-footer-col"><h4>Contact</h4><ul>
       <li><a href="tel:+8801877011100">📞 +880 1877-011100</a></li>
       <li><a href="mailto:tashfinyounus1@gmail.com">✉️ tashfinyounus1@gmail.com</a></li>
-      <li><a href="contact.html">📍 Kaliganj, Gazipur</a></li>
+      <li><a href="contact.html">📍 House 42, Road 11, Dhanmondi, Dhaka, Bangladesh, Bangladesh</a></li>
     </ul></div>
   </div>
   <div class="mahi-footer-bottom">
