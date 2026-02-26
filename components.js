@@ -1,7 +1,3 @@
-// ── EliteCart Online — components.js ──
-// Injects header, footer, cart panel, wishlist panel, auth modal, checkout, track modal
-// into any page that includes this script.
-
 (function () {
   const HEADER_HTML = `
 <!-- TOPBAR -->
